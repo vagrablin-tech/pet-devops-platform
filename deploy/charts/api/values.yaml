@@ -1,0 +1,6 @@
+image:
+  repository: k3d-registry.localhost:5000/pet/api
+  tag: dev
+
+ingress:
+  host: api.127.0.0.1.nip.io
