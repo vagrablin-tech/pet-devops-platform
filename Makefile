@@ -69,6 +69,6 @@ api-undeploy:
 
 test-smoke:
 	@echo "GET /healthz"
-	@curl -fsS http://api.127.0.0.1.nip.io/healthz | jq .
+	@curl -fsS -H 'Host: api.127.0.0.1.nip.io' http://127.0.0.1/healthz | jq .
 	@echo "GET /metrics"
-	@curl -fsS http://api.127.0.0.1.nip.io/metrics | head
+	@curl -fsS -H 'Host: api.127.0.0.1.nip.io' http://127.0.0.1/metrics | head
