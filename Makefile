@@ -33,20 +33,19 @@ cluster-down:
 
 infra-up:
 	@kubectl create ns $(NAMESPACE) >/dev/null 2>&1 || true
-	@helm repo add bitnami https://charts.bitnami.com/bitnami >/dev/null 2>&1 || true
-	@helm repo update >/dev/null
-	@helm upgrade --install postgres bitnami/postgresql \
+	@helm upgrade --install postgres oci://registry-1.docker.io/bitnamicharts/postgresql \
 		-n $(NAMESPACE) \
 		--set auth.postgresPassword=postgres \
 		--set auth.database=app
-	@helm upgrade --install redis bitnami/redis \
+	@helm upgrade --install redis oci://registry-1.docker.io/bitnamicharts/redis \
 		-n $(NAMESPACE) \
 		--set auth.enabled=false
-	@helm upgrade --install rabbitmq bitnami/rabbitmq \
+	@helm upgrade --install rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq \
 		-n $(NAMESPACE) \
 		--set auth.username=user \
 		--set auth.password=pass
 	@echo "Infra up (postgres/redis/rabbitmq)"
+
 
 infra-down:
 	@helm uninstall postgres -n $(NAMESPACE) >/dev/null 2>&1 || true
